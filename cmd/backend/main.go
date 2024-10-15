@@ -24,7 +24,7 @@ func main() {
 	app.Use(recover.New())
 
 	routers.UseFinpay(app)
-	routers.UseIrs(app)
+	routers.UseIrs(conf, app)
 	routers.UseOYI(conf, app)
 
 	if err := app.Listen(conf.GetListenAddress()); err != nil {

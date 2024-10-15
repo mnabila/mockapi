@@ -1,15 +1,20 @@
 package controllers
 
 import (
+	"fmt"
+	"net/url"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/mnabila/mockapi/internal/dto"
 	"github.com/mnabila/mockapi/internal/utils"
 )
 
-type IRSController struct{}
+type IRSController struct {
+	notifyUrl string
+}
 
-func NewIRSController() *IRSController {
-	return &IRSController{}
+func NewIRSController(notify string) *IRSController {
+	return &IRSController{notifyUrl: notify}
 }
 
 func (ctrl IRSController) Transaction(c *fiber.Ctx) error {
@@ -20,6 +25,27 @@ func (ctrl IRSController) Transaction(c *fiber.Ctx) error {
 			Msg:     err.Error(),
 		})
 	}
+
+	go func() {
+		notify, err := url.Parse(ctrl.notifyUrl)
+		if err != nil {
+			return
+		}
+
+		value := url.Values{}
+		value.Set("id", query.ID)
+		value.Set("pin", query.PIN)
+		value.Set("user", query.User)
+		value.Set("pass", query.Pass)
+		value.Set("kodeproduk", query.KodeProduk)
+		value.Set("tujuan", query.KodeProduk)
+		value.Set("counter", fmt.Sprint(query.Counter))
+		value.Set("idtrx", query.IDTrx)
+		notify.RawQuery = value.Encode()
+
+		agent := fiber.Get(notify.String())
+		agent.Bytes()
+	}()
 
 	return c.JSON(dto.IrsTransactionRes{
 		Success: true,
