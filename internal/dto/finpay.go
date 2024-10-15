@@ -25,12 +25,12 @@ type Customer struct {
 }
 
 type Order struct {
-	ID          string `json:"id,omitempty"`
-	Amount      string `json:"amount,omitempty"`
-	Currency    string `json:"currency,omitempty"`
-	Description string `json:"description,omitempty"`
-	Timeout     int    `json:"timeout,omitempty"`
-	Items       []Item `json:"item,omitempty"`
+	ID          string  `json:"id,omitempty"`
+	Amount      float64 `json:"amount,omitempty"`
+	Currency    string  `json:"currency,omitempty"`
+	Description string  `json:"description,omitempty"`
+	Timeout     int     `json:"timeout,omitempty"`
+	Items       []Item  `json:"item,omitempty"`
 }
 
 type Item struct {

@@ -16,7 +16,7 @@ export default function() {
     },
     order: {
       id: "1680580078605",
-      amount: "200",
+      amount: 200,
       description: "Testing",
       item: [
         {
