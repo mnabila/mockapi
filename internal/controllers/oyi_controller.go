@@ -1,15 +1,21 @@
 package controllers
 
 import (
+	"time"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/mnabila/mockapi/internal/dto"
 	"github.com/mnabila/mockapi/internal/utils"
 )
 
-type OYTController struct{}
+type OYTController struct {
+	notifyUrl string
+}
 
-func NewOYTController() *OYTController {
-	return &OYTController{}
+func NewOYTController(notify string) *OYTController {
+	return &OYTController{
+		notifyUrl: notify,
+	}
 }
 
 func (ctrl OYTController) Ewallet(c *fiber.Ctx) error {
@@ -22,6 +28,25 @@ func (ctrl OYTController) Ewallet(c *fiber.Ctx) error {
 			},
 		})
 	}
+
+	go func() {
+		timestamp := time.Now().Add(24 * time.Hour).Format("02/01/2006T15:04:05.000-0700")
+		payload := dto.OYIEwalletNotify{
+			Success:            true,
+			PartnerTrxId:       body.PartnerTrxId,
+			TrxId:              utils.RandString("1234567890qwertyuiop", 32),
+			CustomerId:         body.CustomerId,
+			Amount:             body.Amount,
+			EwalletCode:        body.EwalletCode,
+			MobileNumber:       body.MobileNumber,
+			SuccessRedirectURL: body.SuccessRedirectURL,
+			SettlementTime:     timestamp,
+			SettlementStatus:   "WAITING",
+		}
+
+		agent := fiber.Post(ctrl.notifyUrl)
+		agent.JSON(payload)
+	}()
 
 	return c.JSON(dto.OYIEwalletRes{
 		Status: dto.OYIStatus{

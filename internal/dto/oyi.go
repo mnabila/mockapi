@@ -27,3 +27,17 @@ type OYIEwalletRes struct {
 	EwalletCode      string    `json:"ewallet_code"`
 	EwalletURL       string    `json:"ewallet_url"`
 }
+
+type OYIEwalletNotify struct {
+	Success            bool    `json:"success"`
+	PartnerTrxId       string  `json:"partner_trx_id,omitempty"`
+	TrxId              string  `json:"trx_id"`
+	RefNumber          string  `json:"ref_number,omitempty"`
+	CustomerId         string  `json:"customer_id"`
+	Amount             float64 `json:"amount"`
+	EwalletCode        string  `json:"ewallet_code"`
+	MobileNumber       string  `json:"mobile_number"`
+	SuccessRedirectURL string  `json:"success_redirect_url"`
+	SettlementTime     string  `json:"settlement_time"`
+	SettlementStatus   string  `json:"settlement_status"`
+}

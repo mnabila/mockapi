@@ -11,6 +11,8 @@ import (
 type EnvConfig struct {
 	ServerAddr string `koanf:"SERVER_ADDR"`
 	ServerPort int    `koanf:"SERVER_PORT"`
+
+	FinpayNotifyUrl string `koanf:"FINPAY_NOTIFY_URL"`
 }
 
 func (c EnvConfig) GetListenAddress() string {

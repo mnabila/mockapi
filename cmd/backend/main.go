@@ -25,7 +25,7 @@ func main() {
 
 	routers.UseFinpay(app)
 	routers.UseIrs(app)
-	routers.UseOYI(app)
+	routers.UseOYI(conf, app)
 
 	if err := app.Listen(conf.GetListenAddress()); err != nil {
 		log.Fatalf("failed run service in %s with error message: %v", conf.GetListenAddress(), err)
