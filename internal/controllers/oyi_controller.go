@@ -46,6 +46,7 @@ func (ctrl OYTController) Ewallet(c *fiber.Ctx) error {
 
 		agent := fiber.Post(ctrl.notifyUrl)
 		agent.JSON(payload)
+		agent.Bytes()
 	}()
 
 	return c.JSON(dto.OYIEwalletRes{
