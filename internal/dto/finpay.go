@@ -1,20 +1,29 @@
 package dto
 
 type FinpayEwalletReq struct {
-	Customer      *Customer      `json:"customer"`
-	Order         *Order         `json:"order"`
-	URL           *URL           `json:"url"`
-	SourceOfFunds *SourceOfFunds `json:"sourceOfFunds"`
+	Customer      *Customer      `json:"customer,omitempty"`
+	Order         *Order         `json:"order,omitempty"`
+	URL           *URL           `json:"url,omitempty"`
+	SourceOfFunds *SourceOfFunds `json:"sourceOfFunds,omitempty"`
 }
 
 type FinpayEwalletRes struct {
-	ResponseCode    string  `json:"responseCode"`
-	ResponseMessage string  `json:"responseMessage"`
-	AppUrl          string  `json:"appurl"`
-	RedirectURL     string  `json:"redirecturl"`
-	ExpiryLink      string  `json:"expiryLink"`
-	PaymentCode     any     `json:"paymentCode"`
-	ProcessingTime  float64 `json:"processingTime"`
+	ResponseCode    string  `json:"responseCode,omitempty"`
+	ResponseMessage string  `json:"responseMessage,omitempty"`
+	AppUrl          string  `json:"appurl,omitempty"`
+	RedirectURL     string  `json:"redirecturl,omitempty"`
+	ExpiryLink      string  `json:"expiryLink,omitempty"`
+	PaymentCode     any     `json:"paymentCode,omitempty"`
+	ProcessingTime  float64 `json:"processingTime,omitempty"`
+}
+
+type FinpayEwalletNotify struct {
+	Customer  *Customer `json:"customer,omitempty"`
+	Order     *Order    `json:"order,omitempty"`
+	Card      *Card     `json:"card,omitempty"`
+	Meta      *Meta     `json:"meta,omitempty"`
+	Result    *Result   `json:"result,omitempty"`
+	Signature string    `json:"signature,omitempty"`
 }
 
 type Customer struct {
@@ -53,15 +62,32 @@ type SourceOfFunds struct {
 }
 
 type Result struct {
-	Payment Payment `json:"payment"`
+	Payment Payment `json:"payment,omitempty"`
 }
 
 type Payment struct {
-	Status     string `json:"status"`
-	StatusDesc string `json:"statusDesc"`
-	UserDesc   string `json:"userDesc"`
-	Datetime   string `json:"datetime"`
-	Reference  string `json:"reference"`
-	Channel    any    `json:"channel"`
-	Amount     int    `json:"amount"`
+	Status     string `json:"status,omitempty"`
+	StatusDesc string `json:"statusDesc,omitempty"`
+	UserDesc   string `json:"userDesc,omitempty"`
+	Datetime   string `json:"datetime,omitempty"`
+	Reference  string `json:"reference,omitempty"`
+	Channel    any    `json:"channel,omitempty"`
+	Amount     int    `json:"amount,omitempty"`
+}
+
+type Meta struct {
+	Data any `json:"data,omitempty"`
+}
+
+type CardInfo struct {
+	Brand   string `json:"brand,omitempty"`
+	Issuing string `json:"issuing,omitempty"`
+	Type    string `json:"type,omitempty"`
+	SubType string `json:"subType,omitempty"`
+	Country string `json:"country,omitempty"`
+}
+
+type Card struct {
+	Mask string   `json:"mask,omitempty"`
+	Info CardInfo `json:"info,omitempty"`
 }

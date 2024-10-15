@@ -29,6 +29,9 @@ func main() {
 	// irs h2h
 	app.Get("/api/h2h", controllers.IrsController)
 
+	// oyi ewallet
+	app.Get("/e-wallet-aggregator/create-transaction", controllers.OYIController)
+
 	if err := app.Listen(conf.GetListenAddress()); err != nil {
 		log.Fatalf("failed run service in %s with error message: %v", conf.GetListenAddress(), err)
 	}
