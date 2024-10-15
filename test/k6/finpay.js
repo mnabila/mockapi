@@ -1,5 +1,8 @@
 import http from "k6/http";
-import { check, fail, sleep } from "k6";
+import { Counter } from "k6/metrics";
+
+const success = new Counter("success");
+const failed = new Counter("failed");
 
 export const options = {
   vus: 100,
@@ -56,11 +59,9 @@ export default function() {
     },
   });
 
-  const isSuccess = check(resp, {
-    "status code must be 200": (response) => response.status === 200,
-  });
-
-  if (!isSuccess) {
-    fail(`request failed with status ${resp.status_text}`);
+  if (resp.status === 200) {
+    success.add(1);
+  } else {
+    failed.add(1);
   }
 }

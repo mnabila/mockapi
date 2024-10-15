@@ -1,6 +1,6 @@
 package dto
 
-type IrsReq struct {
+type IrsTransactionReq struct {
 	ID         string `json:"id" query:"id"`
 	PIN        string `json:"pin" query:"pin"`
 	User       string `json:"user" query:"user"`
@@ -12,7 +12,7 @@ type IrsReq struct {
 	Jenis      int    `json:"jenis" query:"jenis"`
 }
 
-type IrsRes struct {
+type IrsTransactionRes struct {
 	Success bool   `json:"success"`
 	Produk  string `json:"produk"`
 	Tujuan  string `json:"tujuan"`

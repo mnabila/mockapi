@@ -7,7 +7,13 @@ import (
 	"github.com/mnabila/mockapi/internal/dto"
 )
 
-func FinpayEwalletController(c *fiber.Ctx) error {
+type FinpayController struct{}
+
+func NewFinpayController() *FinpayController {
+	return &FinpayController{}
+}
+
+func (ctrl FinpayController) Ewallet(c *fiber.Ctx) error {
 	start := time.Now()
 	var body dto.FinpayEwalletReq
 	if err := c.BodyParser(&body); err != nil {

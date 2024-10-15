@@ -6,16 +6,24 @@ import (
 	"github.com/mnabila/mockapi/internal/utils"
 )
 
-func OYIController(c *fiber.Ctx) error {
-	var body dto.OYITransactionReq
+type OYTController struct{}
+
+func NewOYTController() *OYTController {
+	return &OYTController{}
+}
+
+func (ctrl OYTController) Ewallet(c *fiber.Ctx) error {
+	var body dto.OYIEwalletReq
 	if err := c.BodyParser(&body); err != nil {
-		return c.Status(fiber.StatusBadRequest).JSON(dto.IrsRes{
-			Success: false,
-			Msg:     err.Error(),
+		return c.Status(fiber.StatusBadRequest).JSON(dto.OYIEwalletRes{
+			Status: dto.OYIStatus{
+				Code:    "990",
+				Message: "	Request is Rejected (Parameter is invalid)",
+			},
 		})
 	}
 
-	return c.JSON(dto.OYITransactionRes{
+	return c.JSON(dto.OYIEwalletRes{
 		Status: dto.OYIStatus{
 			Code:    "000",
 			Message: "success",

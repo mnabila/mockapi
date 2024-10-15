@@ -6,16 +6,22 @@ import (
 	"github.com/mnabila/mockapi/internal/utils"
 )
 
-func IrsController(c *fiber.Ctx) error {
-	var query dto.IrsReq
+type IRSController struct{}
+
+func NewIRSController() *IRSController {
+	return &IRSController{}
+}
+
+func (ctrl IRSController) Transaction(c *fiber.Ctx) error {
+	var query dto.IrsTransactionReq
 	if err := c.QueryParser(&query); err != nil {
-		return c.Status(fiber.StatusBadRequest).JSON(dto.IrsRes{
+		return c.Status(fiber.StatusBadRequest).JSON(dto.IrsTransactionRes{
 			Success: false,
 			Msg:     err.Error(),
 		})
 	}
 
-	return c.JSON(dto.IrsRes{
+	return c.JSON(dto.IrsTransactionRes{
 		Success: true,
 		Produk:  query.KodeProduk,
 		Tujuan:  query.Tujuan,

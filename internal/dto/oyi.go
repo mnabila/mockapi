@@ -5,7 +5,7 @@ type OYIStatus struct {
 	Message string `json:"message"`
 }
 
-type OYITransactionReq struct {
+type OYIEwalletReq struct {
 	CustomerId         string  `json:"customer_id,omitempty"`
 	SubMerchantId      string  `json:"sub_merchant_id,omitempty"`
 	PartnerTrxId       string  `json:"partner_trx_id,omitempty"`
@@ -17,7 +17,7 @@ type OYITransactionReq struct {
 	ExpirationTime     int     `json:"expiration_time,omitempty"`
 }
 
-type OYITransactionRes struct {
+type OYIEwalletRes struct {
 	Status           OYIStatus `json:"status"`
 	EwalletTrxStatus string    `json:"ewallet_trx_status"`
 	Amount           float64   `json:"amount"`

@@ -6,7 +6,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/mnabila/mockapi/internal/configs"
-	"github.com/mnabila/mockapi/internal/controllers"
+	"github.com/mnabila/mockapi/internal/routers"
 )
 
 func main() {
@@ -23,14 +23,9 @@ func main() {
 
 	app.Use(recover.New())
 
-	// finpay
-	app.Post("/pg/payment/card/initiate", controllers.FinpayEwalletController)
-
-	// irs h2h
-	app.Get("/api/h2h", controllers.IrsController)
-
-	// oyi ewallet
-	app.Get("/e-wallet-aggregator/create-transaction", controllers.OYIController)
+	routers.UseFinpay(app)
+	routers.UseIrs(app)
+	routers.UseOYI(app)
 
 	if err := app.Listen(conf.GetListenAddress()); err != nil {
 		log.Fatalf("failed run service in %s with error message: %v", conf.GetListenAddress(), err)
