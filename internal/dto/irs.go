@@ -8,7 +8,7 @@ type IrsTransactionReq struct {
 	KodeProduk string `json:"kodeproduk" query:"kodeproduk"`
 	Tujuan     string `json:"tujuan" query:"tujuan"`
 	Counter    int    `json:"counter" query:"counter"`
-	IDTrx      string `json:"idtrx" query:"id_trx"`
+	IDTrx      string `json:"idtrx" query:"idtrx"`
 	Jenis      int    `json:"jenis" query:"jenis"`
 }
 

@@ -35,14 +35,13 @@ func (ctrl IRSController) Transaction(c *fiber.Ctx) error {
 		}
 
 		value := url.Values{}
-		value.Set("id", query.ID)
-		value.Set("pin", query.PIN)
-		value.Set("user", query.User)
-		value.Set("pass", query.Pass)
-		value.Set("kodeproduk", query.KodeProduk)
-		value.Set("tujuan", query.KodeProduk)
-		value.Set("counter", fmt.Sprint(query.Counter))
-		value.Set("idtrx", query.IDTrx)
+		value.Set("serverid", utils.RandString("1234567890", 15))
+		value.Set("clientid", query.IDTrx)
+		value.Set("statuscode", "1")
+		value.Set("kp", query.KodeProduk)
+		value.Set("msisdn", query.Tujuan)
+		value.Set("sn", utils.RandString("1234567890", 12))
+		value.Set("ms", fmt.Sprintf("TRX %s.%s BERHASIL", query.KodeProduk, query.Tujuan))
 		notify.RawQuery = value.Encode()
 
 		agent := fiber.Get(notify.String())
