@@ -5,7 +5,7 @@ type OYIStatus struct {
 	Message string `json:"message"`
 }
 
-type OYIEwalletReq struct {
+type OYICreateEwalletReq struct {
 	CustomerId         string  `json:"customer_id,omitempty"`
 	SubMerchantId      string  `json:"sub_merchant_id,omitempty"`
 	PartnerTrxId       string  `json:"partner_trx_id,omitempty"`
@@ -21,9 +21,9 @@ type OYIEwalletRes struct {
 	Status           OYIStatus `json:"status"`
 	EwalletTrxStatus string    `json:"ewallet_trx_status"`
 	Amount           float64   `json:"amount"`
-	TrxID            string    `json:"trx_id"`
-	CustomerID       string    `json:"customer_id"`
-	PartnerTrxID     string    `json:"partner_trx_id"`
+	TrxId            string    `json:"trx_id"`
+	CustomerId       string    `json:"customer_id"`
+	PartnerTrxId     string    `json:"partner_trx_id"`
 	EwalletCode      string    `json:"ewallet_code"`
 	EwalletURL       string    `json:"ewallet_url"`
 }
@@ -40,4 +40,8 @@ type OYIEwalletNotify struct {
 	SuccessRedirectURL string  `json:"success_redirect_url"`
 	SettlementTime     string  `json:"settlement_time"`
 	SettlementStatus   string  `json:"settlement_status"`
+}
+
+type OYIStatusEwalletReq struct {
+	PartnerTrxId string `json:"partner_trx_id"`
 }

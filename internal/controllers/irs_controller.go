@@ -3,6 +3,7 @@ package controllers
 import (
 	"fmt"
 	"net/url"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/mnabila/mockapi/internal/dto"
@@ -27,6 +28,7 @@ func (ctrl IRSController) Transaction(c *fiber.Ctx) error {
 	}
 
 	go func() {
+		time.Sleep(500 * time.Millisecond)
 		notify, err := url.Parse(ctrl.notifyUrl)
 		if err != nil {
 			return
