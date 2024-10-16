@@ -13,6 +13,7 @@ type EnvConfig struct {
 	ServerPort int    `koanf:"SERVER_PORT"`
 
 	FinpayNotifyUrl string `koanf:"FINPAY_NOTIFY_URL"`
+	OYINotifyUrl    string `koanf:"OYI_NOTIFY_URL"`
 	IRSNotifyUrl    string `koanf:"IRS_NOTIFY_URL"`
 }
 

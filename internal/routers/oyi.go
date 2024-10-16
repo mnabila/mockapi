@@ -7,6 +7,6 @@ import (
 )
 
 func UseOYI(conf *configs.EnvConfig, r fiber.Router) {
-	ctrl := controllers.NewOYTController(conf.FinpayNotifyUrl)
+	ctrl := controllers.NewOYTController(conf.OYINotifyUrl)
 	r.Post("/api/e-wallet-aggregator/create-transaction", ctrl.Ewallet)
 }
